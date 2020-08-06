@@ -15,7 +15,7 @@ build:
   tags:
     - ncrc4
   script:
-    - conda env create --file repro.yml
+    - conda create --name repro --file spec_env.txt
     - . activate repro
     - conda list -e
     - wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.3.tar.gz

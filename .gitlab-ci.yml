@@ -21,9 +21,10 @@ build:
     - wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.3.tar.gz
     - tar -zxf mpi4py-3.0.3.tar.gz
     - cat gaea_mpi.cfg >> mpi4py-3.0.3/mpi.cfg
-    - cd mpi4py-3.0.3
+    - pushd mpi4py-3.0.3
     - python setup.py build --mpi=gaea-gnu
     - python setup.py install
+    - popd
     - . activate repro
     - python create_grids.py
     - sbatch --wait regrid.bash

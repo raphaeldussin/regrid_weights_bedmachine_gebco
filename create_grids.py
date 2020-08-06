@@ -122,8 +122,8 @@ if __name__ == '__main__':
     # create bedmachine grid:
     bedmachine = create_bedmachine_xy()
     bedmachine = add_lon_lat(bedmachine, PROJSTRING)
-    bedmachine_encoding = {'lon': {'dtype': 'float64'},
-                           'lat': {'dtype': 'float64'},
+    bedmachine_encoding = {'lon': {'dtype': 'float64', '_FillValue': 1.0e+15},
+                           'lat': {'dtype': 'float64', '_FillValue': 1.0e+15},
                            'x': {'dtype': 'int32'},
                            'y': {'dtype': 'int32'}}
     bedmachine.to_netcdf('grid_bedmachineAnt.nc', format='NETCDF3_64BIT',

@@ -95,14 +95,14 @@ def create_grid_gebco():
     return ds
 
 
-def create_grid_gebco_antarctic(ds):
+def create_grid_gebco_antarctic(ds, fileout):
     """ subset gebco grid where bedmachine exists """
-    gebco_SO = gebco.sel(lat=slice(-90, -62))
+    gebco_SO = ds.sel(lat=slice(-90, -62))
     gebco_SO['lon'].attrs = dict(units='degrees_east')
     gebco_SO['lat'].attrs = dict(units='degrees_north')
     gebco_encoding = {'lon': {'dtype': 'float64'},
                       'lat': {'dtype': 'float64'}}
-    gebco_SO.to_netcdf('grid_gebco_southof62.nc', format='NETCDF3_64BIT',
+    gebco_SO.to_netcdf(fileout, format='NETCDF3_64BIT',
                        engine='netcdf4', encoding=gebco_encoding)
 
 
@@ -116,9 +116,10 @@ if __name__ == '__main__':
     #                engine='netcdf4', encoding=gebco_encoding)
 
     # subset gebco grid:
-    #gebco = xr.open_dataset('grid_gebco_30sec_original.nc')
-    gebco = xr.open_dataset('grid_gebco_15sec_original.nc')
-    create_grid_gebco_antarctic(gebco)
+    gebco30 = xr.open_dataset('grid_gebco_30sec_original.nc')
+    create_grid_gebco_antarctic(gebco30, 'grid_gebco_30sec_southof62.nc')
+    gebco15 = xr.open_dataset('grid_gebco_15sec_original.nc')
+    create_grid_gebco_antarctic(gebco15, 'grid_gebco_15sec_southof62.nc')
 
     # create bedmachine grid:
     bedmachine = create_bedmachine_xy()

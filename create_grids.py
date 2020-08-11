@@ -116,7 +116,8 @@ if __name__ == '__main__':
     #                engine='netcdf4', encoding=gebco_encoding)
 
     # subset gebco grid:
-    gebco = xr.open_dataset('grid_gebco_30sec_original.nc')
+    #gebco = xr.open_dataset('grid_gebco_30sec_original.nc')
+    gebco = xr.open_dataset('grid_gebco_15sec_original.nc')
     create_grid_gebco_antarctic(gebco)
 
     # create bedmachine grid:
